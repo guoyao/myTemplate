@@ -85,7 +85,7 @@
 ##	下载
 
 * [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 1.35kb)* 
-* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(压缩版, 558b)*
+* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 558b)*
 
 ## 方法
 
