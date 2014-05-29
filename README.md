@@ -72,7 +72,7 @@
 	document.getElementById('content').innerHTML = html;
 
 
-[演示](http://demo.guoyao.me/myTemplate)
+[演示](http://demo.guoyao.me/myTemplate/demo/)
 
 ##	模板语法
 	
