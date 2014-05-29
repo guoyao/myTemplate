@@ -8,10 +8,10 @@
     "main"        : "./dist/myTemplate.js",
     "version"     : "0.1.0",
     "devDependencies": {
-        "grunt-cli": "*",
         "grunt": "*",
         "grunt-contrib-clean": "*",
         "grunt-contrib-jshint": "*",
+        "grunt-contrib-copy": "*",
         "grunt-contrib-uglify": "*"
     },
     "license": "BSD"

@@ -77,15 +77,15 @@
 ##	模板语法
 	
 	<%if (this.age > 25){%>
-		<%for (var i=0;i<children.length;i++) {%>
-			<div><%=i%>. <%=children[i].name%></div>
+		<%for (var i=0;i<this.children.length;i++) {%>
+			<div><%=i%>. <%=this.children[i].name%></div>
 		<%}%>
 	<%}%>
 
 ##	下载
 
 * [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 1.35kb)* 
-* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(压缩版, 2.3kb)*
+* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(压缩版, 558b)*
 
 ## 方法
 

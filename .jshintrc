@@ -5,6 +5,7 @@
     "browser"  : true,
     "eqeqeq"   : false,    // true: Require triple equals (===) for comparison
     "eqnull"   : true,    // true: Tolerate use of `== null`
+    "evil"     : true,
     "debug"    : true,    // true: This option suppresses warnings about the debugger statements in your code
     "devel"    : true,
     "curly"    : false,    // true: Require {} for every new block or scope

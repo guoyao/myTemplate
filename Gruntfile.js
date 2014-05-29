@@ -13,14 +13,19 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            gruntfile: {
-                src: 'Gruntfile.js'
-            },
-            src: {
-                src: ['src/.js']
+            dist: {
+                src: ['src/*.js']
             }
         },
-        
+            
+        copy: {
+            dist: {
+                files: [
+                    {'dist/<%= pkg.name %>.js': 'src/<%= pkg.name %>.js'}
+                ]
+            }
+        },       
+ 
         uglify: {
             dist: {
                 files: {
@@ -32,10 +37,11 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Full distribution task.
-    grunt.registerTask('dist', ['clean', 'jshint', 'uglify']);
+    grunt.registerTask('dist', ['clean', 'jshint', 'copy', 'uglify']);
 
     // Default task(s).
     grunt.registerTask('default', ['dist']);
