@@ -1,0 +1,18 @@
+{
+    "name"        : "myTemplate",
+    "description" : "JavaScript Template Engine",
+    "homepage"    : "https://github.com/guoyao/myTemplate",
+    "keywords"    : ["template"],
+    "author"      : "Guoyao Wu",
+    "repository"  : {"type": "git", "url": "git://github.com/guoyao/myTemplate.git"},
+    "main"        : "./dist/myTemplate.js",
+    "version"     : "0.1.0",
+    "devDependencies": {
+        "grunt-cli": "*",
+        "grunt": "*",
+        "grunt-contrib-clean": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-uglify": "*"
+    },
+    "license": "BSD"
+}
