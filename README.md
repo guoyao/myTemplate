@@ -10,6 +10,7 @@
 *	[模板语法](#模板语法)
 *	[下载](#下载)
 *	[方法](#方法)
+*	[开发者](#开发者)
 *	[授权协议](#授权协议)
 
 ##	特性
@@ -86,12 +87,21 @@
 
 * [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 1.35kb)* 
 * [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 558b)*
+* Install with [Bower](http://bower.io): `bower install myTemplate`.
 
 ## 方法
 
 ###	myTemplate(template, data)
 
 如果没有 data 参数，那么将返回一渲染函数，否则直接返回渲染结果。
+
+##	开发者
+
+**Guoyao Wu**
+
++ [http://guoyao.me](http://guoyao.me)
++ [http://github.com/guoyao](http://github.com/guoyao)
++ [https://twitter.com/wuguoyao](https://twitter.com/wuguoyao)
 
 ## 授权协议
 
