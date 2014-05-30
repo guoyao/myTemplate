@@ -1,5 +1,5 @@
 
-# myTemplate-0.1.0
+# myTemplate-0.2.0
 
 简洁的 javascript 模板引擎
 
