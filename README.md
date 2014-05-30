@@ -85,8 +85,8 @@
 
 ##	下载
 
-* [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 1.35kb)* 
-* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 558b)*
+* [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 2.38 kb)* 
+* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 767 b)*
 * Install with [Bower](http://bower.io): `bower install myTemplate`.
 
 ## 方法
