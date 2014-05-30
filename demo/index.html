@@ -6,59 +6,7 @@
 </head>
 <body>
     <h1>示例</h1>
-    <div id="templateRegion"></div>
-    <div id="templateRegion2"></div>
-    <script type="text/template" id="template">
-        <p><strong>Name:</strong> <%= this.name %></p>
-        <p><strong>Age:</strong> <%= this.age %></p>
-        <% if (this.gender) { %>
-            <p><strong>Gender:</strong> <%= this.gender %></p>
-        <% } %>
-        <% if (this.children) { %>
-            <p><strong>Children:</strong></p>
-            <% for (var i = 0, len = this.children.length, child; i < len; i++) { 
-                child = this.children[i]; 
-            %>
-                <ul style="background-color: #f5f5f5;">
-                    <li><strong>Name:</strong> <%= child.name %></li>
-                    <li><strong>Age:</strong> <%= child.age %></li>
-                    <% if (child.gender == "female") { %>
-                        <li><strong>Gender:</strong> <%= child.gender %></li>
-                    <% } %>
-                </ul>
-            <% } %>
-        <% } %>
-    </script>
-    <script src="../src/myTemplate.js"></script>
-    <script>
-        (function (document) {
-            var templateRegion = document.getElementById("templateRegion"),
-                templateRegion2 = document.getElementById("templateRegion2"),
-                template = document.getElementById("template").innerHTML,
-                data = {
-                    name: 'guoyao',
-                    age: 26,
-                    gender: 'male',
-                    children: [
-                        {
-                            name: 'child 1',
-                            age: 5,
-                            gender: 'female'
-                        },
-                        {
-                            name: 'child 2',
-                            age: 3,
-                            gender: 'male'
-                        }
-                    ]
-                },
-                myRenderer;
-            
-            templateRegion.innerHTML = myTemplate(template, data);
-            
-            myRenderer = myTemplate(template);
-            templateRegion2.innerHTML = myRenderer(data);
-        })(document);
-    </script>
+    <p><a href="simple/index.html">Simple Demo</a>&nbsp;&nbsp;作为浏览器全局变量</p>
+    <p><a href="requirejs/index.html">RequireJS Demo</a>&nbsp;&nbsp;作为AMD模块</p>
 </body>
 </html>
