@@ -1,7 +1,7 @@
 //     myTemplate.js 0.2.0
 
 //     (c) 2014 Guoyao Wu, 
-//     Backbone may be freely distributed under the BSD license.
+//     myTemplate may be freely distributed under the BSD license.
 //     For all details and documentation:
 //     https://github.com/guoyao/myTemplate
 
@@ -20,7 +20,7 @@
     }
 }(this, function(root) {
     
-    // Save the previous value of the `Backbone` variable, so that it can be
+    // Save the previous value of the `myTemplate` variable, so that it can be
     // restored later on, if `noConflict` is used.
     var previousMyTemplate = root.myTemplate;
     
