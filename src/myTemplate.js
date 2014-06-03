@@ -24,8 +24,12 @@
     // restored later on, if `noConflict` is used.
     var previousMyTemplate = root.myTemplate;
     
-    var LEFT_DELIMITER = '<%';
-    var RIGHT_DELIMITER = '%>';
+    var OPEN_TAG = '<%',
+        CLOSE_TAG = '%>',
+        config = {
+            openTag: OPEN_TAG,
+            closeTag: CLOSE_TAG
+        };
     
     /**
      * 模板引擎
@@ -42,14 +46,14 @@
             funcBody,
             func;
 
-        if (myTemplate.LEFT_DELIMITER != LEFT_DELIMITER) {
+        if (config.openTag != OPEN_TAG) {
             // 将自定义分隔符转换成默认分隔符
-            tmpl = tmpl.replace(new RegExp(myTemplate.LEFT_DELIMITER, 'g'), LEFT_DELIMITER);
+            tmpl = tmpl.replace(new RegExp(config.openTag, 'g'), OPEN_TAG);
         }
         
-        if (myTemplate.RIGHT_DELIMITER != RIGHT_DELIMITER) {
+        if (config.closeTag != CLOSE_TAG) {
             // 将自定义分隔符转换成默认分隔符
-            tmpl = tmpl.replace(new RegExp(myTemplate.RIGHT_DELIMITER, 'g'), RIGHT_DELIMITER);
+            tmpl = tmpl.replace(new RegExp(config.closeTag, 'g'), CLOSE_TAG);
         }
         
         funcBody = 'var result = "' + tmpl + '";';
@@ -76,10 +80,11 @@
         }
     };
 
-    myTemplate.version = '0.2.0';
+    myTemplate.version = '0.3.0';
     
-    myTemplate.LEFT_DELIMITER = LEFT_DELIMITER;
-    myTemplate.RIGHT_DELIMITER = RIGHT_DELIMITER;
+    myTemplate.config = function(name, value) {
+        config[name] = value;
+    };
     
     // Runs myTemplate.js in *noConflict* mode, returning the `myTemplate` variable
     // to its previous owner. Returns a reference to this myTemplate object.

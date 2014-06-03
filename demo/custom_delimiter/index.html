@@ -32,8 +32,8 @@
     <script src="../../src/myTemplate.js"></script>
     <script>
         (function (document) {
-            myTemplate.LEFT_DELIMITER = '{{';
-            myTemplate.RIGHT_DELIMITER = '}}';
+            myTemplate.config('openTag', '{{');
+            myTemplate.config('closeTag', '}}');
             var templateRegion = document.getElementById("templateRegion"),
                 templateRegion2 = document.getElementById("templateRegion2"),
                 template = document.getElementById("template").innerHTML,
