@@ -1,4 +1,4 @@
-//     myTemplate.js 0.2.0
+//     myTemplate.js 0.3.0
 
 //     (c) 2014 Guoyao Wu, 
 //     myTemplate may be freely distributed under the BSD license.
@@ -24,6 +24,9 @@
     // restored later on, if `noConflict` is used.
     var previousMyTemplate = root.myTemplate;
     
+    var LEFT_DELIMITER = '<%';
+    var RIGHT_DELIMITER = '%>';
+    
     /**
      * 模板引擎
      * @name    myTemplate
@@ -36,19 +39,33 @@
 
         var args = Array.prototype.slice.call(arguments),
             tmpl = args.shift().replace(/\r|\n/g, "").replace(/"/g, '\\"'), //转义"号
-            funcBody = 'var result = "' + tmpl + '";',
+            funcBody,
             func;
 
+        if (myTemplate.LEFT_DELIMITER != LEFT_DELIMITER) {
+            // 将自定义分隔符转换成默认分隔符
+            tmpl = tmpl.replace(new RegExp(myTemplate.LEFT_DELIMITER, 'g'), LEFT_DELIMITER);
+        }
+        
+        if (myTemplate.RIGHT_DELIMITER != RIGHT_DELIMITER) {
+            // 将自定义分隔符转换成默认分隔符
+            tmpl = tmpl.replace(new RegExp(myTemplate.RIGHT_DELIMITER, 'g'), RIGHT_DELIMITER);
+        }
+        
+        funcBody = 'var result = "' + tmpl + '";';
+        
         funcBody = funcBody.replace(/<%=\s*([^>]*)\s*%>/g, function(match, $1) {
             return '" + ' + $1.replace(/\\"/g, '"') + ' + "'; //替换的同时，恢复<%=%>中被转义的"号
         });
+        
         funcBody = funcBody.replace(/<%\s*([^>]*)\s*%>/g, function(match, $1) {
-            return '";' + $1.replace(/\\"/g, '"') + 'result += "'; //替换的同时，恢复<%=%>中被转义的"号
+            return '";' + $1.replace(/\\"/g, '"') + 'result += "'; //替换的同时，恢复<%%>中被转义的"号
         });
 
         funcBody += " return result;";
 
         func = new Function(funcBody);
+        
         if (args.length > 0) {
             return func.apply(args.shift(), args); //返回渲染好的HTML字符串
         }
@@ -60,6 +77,9 @@
     };
 
     myTemplate.version = '0.2.0';
+    
+    myTemplate.LEFT_DELIMITER = LEFT_DELIMITER;
+    myTemplate.RIGHT_DELIMITER = RIGHT_DELIMITER;
     
     // Runs myTemplate.js in *noConflict* mode, returning the `myTemplate` variable
     // to its previous owner. Returns a reference to this myTemplate object.
