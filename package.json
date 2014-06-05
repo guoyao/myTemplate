@@ -6,7 +6,7 @@
     "author"      : "Guoyao Wu",
     "repository"  : {"type": "git", "url": "git://github.com/guoyao/myTemplate.git"},
     "main"        : "./dist/myTemplate.js",
-    "version"     : "0.3.0",
+    "version"     : "1.0.0",
     "devDependencies": {
         "grunt": "*",
         "grunt-contrib-clean": "*",

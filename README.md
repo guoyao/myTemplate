@@ -1,5 +1,5 @@
 
-# myTemplate-0.3.0
+# myTemplate-1.0.0
 
 简洁的 javascript 模板引擎
 
@@ -105,8 +105,13 @@
 ------------ | ------------- | ------------ | ------------
 openTag | String | ``'<%'`` | 逻辑语法开始标签
 closeTag | String | ``'%>'`` | 逻辑语法结束标签
+escape | Boolean | ``true`` | 是否编码输出 HTML 字符
 
 ## 更新日志
+
+### v1.0.0
+
+1. 默认HTML转义（防XSS攻击）
 
 ### v0.3.0
 
