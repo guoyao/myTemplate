@@ -19,8 +19,9 @@
 1.	源码简洁明了，学习成本极低
 2.  不使用with，因此模板中可以输出全局变量
 3.  支持自定义分隔符
-4.  支持Node RequireJS
-5.	支持所有流行的浏览器
+4.  默认HTML转义（防XSS攻击）
+5.  支持Node RequireJS
+6.	支持所有流行的浏览器
 
 ## 快速上手
 
@@ -87,8 +88,8 @@
 
 ##	下载
 
-* [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 3.01 kb)* 
-* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 955 b)*
+* [myTemplate.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.js) *(未压缩版, 3.69 kb)* 
+* [myTemplate.min.js](https://raw.github.com/guoyao/myTemplate/master/dist/myTemplate.min.js) *(压缩版, 1.24 kb)*
 * Install with [Bower](http://bower.io): `bower install myTemplate`.
 
 ## 方法
