@@ -1,123 +1,132 @@
-//     myTemplate.js 1.0.0
+/**
+ * @file 简单的模板引擎
+ * @author wuguoyao(wuguoyao@baidu.com)
+ * @version 1.1.0
+ */
 
-//     (c) 2014 Guoyao Wu, 
-//     myTemplate may be freely distributed under the BSD license.
-//     For all details and documentation:
-//     https://github.com/guoyao/myTemplate
-
-(function(root, factory) {
-    // Set up myTemplate appropriately for the environment. Start with AMD.
+(function (root, factory) {
+    // For AMD.
     if (typeof define === 'function' && define.amd) {
-        define(function() {
+        define(function () {
             return factory(root);
         });
-    // Next for Node.js or CommonJS.
-    } else if (typeof exports !== 'undefined') {
-        module.exports = factory(root);
-    // Finally, as a browser global.
-    } else {
+        // Next for CommonJS.
+    } else if (typeof exports === 'object' && typeof module === 'object') {
+        exports = module.exports = factory(root);
+        // Finally, as a browser global.
+    }
+    else {
         root.myTemplate = factory(root);
     }
-}(this, function(root) {
-    
-    // Save the previous value of the `myTemplate` variable, so that it can be
-    // restored later on, if `noConflict` is used.
+}(this, function (root) {
+    'use strict';
+
+    // for `noConflict`
     var previousMyTemplate = root.myTemplate;
-    
-    var OPEN_TAG = '<%',
-        CLOSE_TAG = '%>',
-        config = {
-            openTag: OPEN_TAG,
-            closeTag: CLOSE_TAG,
-            escape: true
-        };
-    
-    var encodeHTML = function(source) {
-        return config.escape ? String(source)
-            .replace(/&/g,'&amp;')
-            .replace(/</g,'&lt;')
-            .replace(/>/g,'&gt;')
-            .replace(/\\/g,'&#92;')
-            .replace(/"/g,'&quot;')
-            .replace(/'/g,'&#39;') : source;
+
+    var OPEN_TAG = '<%';
+    var CLOSE_TAG = '%>';
+
+    var config = {
+        openTag: OPEN_TAG,
+        closeTag: CLOSE_TAG,
+        escape: true
     };
-    
+
+    var encodeHTML = function (source) {
+        return config.escape ? String(source)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\\/g, '&#92;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;') : source;
+    };
+
+    var _slice = Array.prototype.slice;
+
     /**
-     * 模板引擎
-     * @name    myTemplate
-     * @param   {String}  模板字符串
-     * @param   {Object}  数据
-     * @return  {String, Function}  渲染好的HTML字符串或者渲染方法
+     * @description 模板引擎
+     * @param {...string} args 模板字符串和数据源
+     * @return {string | Function} 渲染好的HTML字符串或者渲染方法
      */
-    var myTemplate = function template() {
-        'use strict';
+    var myTemplate = function () {
+        var args = _slice.call(arguments);
 
-        var args = Array.prototype.slice.call(arguments),
-            tmpl = args.shift().replace(/\r|\n/g, "").replace(/"/g, '\\"'), //转义"号
-            funcBody,
-            func,
-            data,
-            html,
-            renderer;
+        if (args.length === 0) {
+            return '';
+        }
 
-        if (config.openTag != OPEN_TAG) {
-            // 将自定义分隔符转换成默认分隔符
+        var tmpl = args.shift().replace(/\r|\n/g, '').replace(/"/g, '\\"'); // 转义"号
+
+        if (config.openTag !== OPEN_TAG) {
+            // 将自定义开始分隔符转换成默认开始分隔符
             tmpl = tmpl.replace(new RegExp(config.openTag, 'g'), OPEN_TAG);
         }
-        
-        if (config.closeTag != CLOSE_TAG) {
-            // 将自定义分隔符转换成默认分隔符
+
+        if (config.closeTag !== CLOSE_TAG) {
+            // 将自定义结束分隔符转换成默认结束分隔符
             tmpl = tmpl.replace(new RegExp(config.closeTag, 'g'), CLOSE_TAG);
         }
-        
-        funcBody = 'var result = "' + tmpl + '";';
-        
-        funcBody = funcBody.replace(/<%=\s*([^>]*)\s*%>/g, function(match, $1) {
-            //替换的同时，恢复<%=%>中被转义的"号
-            return '" + this.___encodeHTML___(' + $1.replace(/\\"/g, '"') + ') + "'; 
+
+        var funcBody = 'var result = "' + tmpl + '";';
+
+        funcBody = funcBody.replace(/<%=\s*(((?!%>).)*)\s*%>/g, function (match, $1) {
+            // 替换的同时，恢复<%=%>中被转义的"号
+            return '" + this.___encodeHTML___(' + $1.replace(/\\"/g, '"') + ') + "';
         });
-        
-        funcBody = funcBody.replace(/<%\s*([^>]*)\s*%>/g, function(match, $1) {
-            //替换的同时，恢复<%%>中被转义的"号
+
+        funcBody = funcBody.replace(/<%\s*(((?!%>).)*)\s*%>/g, function (match, $1) {
+            // 替换的同时，恢复<%%>中被转义的"号
             return '";' + $1.replace(/\\"/g, '"') + 'result += "';
         });
 
-        funcBody += " return result;";
+        funcBody += ' return result;';
 
-        func = new Function(funcBody);
-        
-        renderer = function(args) {
-            data = args.shift();
+        /* jshint -W054 */
+        var func = new Function(funcBody);
+        /* jshint +W054 */
+
+        /**
+         * 渲染方法
+         * @param {Array} args 数据源
+         * @return {string} 渲染好的HTML字符串
+         */
+        var renderer = function (args) {
+            var data = args.shift();
             data.___encodeHTML___ = encodeHTML;
-            html = func.apply(data, args); 
-            delete(data.___encodeHTML___);
+            var html = func.apply(data, args);
+            delete data.___encodeHTML___;
             return html;
         };
-        
-        //返回渲染好的HTML字符串
+
+        // 返回渲染好的HTML字符串
         if (args.length > 0) {
             return renderer(args);
         }
 
-        //返回渲染方法
-        return function() {
-            args = Array.prototype.slice.call(arguments);
+        // 返回包装的渲染方法
+        return function () {
+            args = _slice.call(arguments);
             return renderer(args);
-        }
+        };
     };
 
-    myTemplate.version = '1.0.0';
-    
-    myTemplate.config = function(name, value) {
+    myTemplate.version = '1.1.0';
+
+    myTemplate.config = function (name, value) {
         config[name] = value;
-    };
-    
-    // Runs myTemplate.js in *noConflict* mode, returning the `myTemplate` variable
-    // to its previous owner. Returns a reference to this myTemplate object.
-    myTemplate.noConflict = function() {
-        root.myTemplate = previousMyTemplate;
         return this;
     };
-    
+
+    // Runs myTemplate.js in *noConflict* mode, returning the `myTemplate` variable
+    // to its previous owner. Returns a reference to this myTemplate object.
+    myTemplate.noConflict = function () {
+        if (root.myTemplate) {
+            root.myTemplate = previousMyTemplate;
+        }
+        return this;
+    };
+
     return myTemplate;
 }));
