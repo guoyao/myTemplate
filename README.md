@@ -110,6 +110,11 @@ escape | Boolean | ``true`` | 是否编码输出 HTML 字符
 
 ## 更新日志
 
+### v1.1.0
+
+1. bug修复
+2. 增加测试用例（使用mocha & chai）
+
 ### v1.0.0
 
 1. 默认HTML转义（防XSS攻击）
